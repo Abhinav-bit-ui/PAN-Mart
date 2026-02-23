@@ -430,7 +430,7 @@
             <div class="search-bar">
                 <input type="text" placeholder="Search for products, brands and more...">
             </div>
-            <div class="cart-icon" onclick="showCart()">
+            <div class="cart-icon" id="cartIcon">
                 🛒
                 <span class="cart-count" id="cartCount">0</span>
             </div>
@@ -442,7 +442,7 @@
         <div class="hero-content">
             <h1>Welcome to PAN-Mart</h1>
             <p>Your One-Stop Shopping Destination for Everything You Need</p>
-            <button class="hero-btn" onclick="scrollToProducts()">Shop Now</button>
+            <button class="hero-btn" id="shopNowBtn">Shop Now</button>
         </div>
     </section>
 
@@ -597,6 +597,10 @@
         // Initialize the page
         function init() {
             renderProducts();
+            
+            // Add event listeners
+            document.getElementById('cartIcon').addEventListener('click', showCart);
+            document.getElementById('shopNowBtn').addEventListener('click', scrollToProducts);
         }
 
         // Render products
