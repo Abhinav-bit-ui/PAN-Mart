@@ -99,6 +99,11 @@
             justify-content: center;
             font-size: 12px;
             font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .cart-count.cart-pulse {
+            transform: scale(1.3);
         }
 
         /* Hero Banner */
@@ -611,11 +616,18 @@
                             $${product.price.toFixed(2)}
                             <span class="original-price">$${product.originalPrice.toFixed(2)}</span>
                         </div>
-                        <button class="add-to-cart-btn" onclick="addToCart(${product.id}, '${product.name}')">
+                        <button class="add-to-cart-btn" data-product-id="${product.id}" data-product-name="${product.name}">
                             Add to Cart
                         </button>
                     </div>
                 `;
+                
+                // Add event listener to the button
+                const addButton = productCard.querySelector('.add-to-cart-btn');
+                addButton.addEventListener('click', function() {
+                    addToCart(product.id, product.name);
+                });
+                
                 productsGrid.appendChild(productCard);
             });
         }
@@ -632,10 +644,10 @@
             const cartCountElement = document.getElementById('cartCount');
             cartCountElement.textContent = cartCount;
             
-            // Add animation
-            cartCountElement.style.transform = 'scale(1.3)';
+            // Add animation class
+            cartCountElement.classList.add('cart-pulse');
             setTimeout(() => {
-                cartCountElement.style.transform = 'scale(1)';
+                cartCountElement.classList.remove('cart-pulse');
             }, 200);
         }
 
